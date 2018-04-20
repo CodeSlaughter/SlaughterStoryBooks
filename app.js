@@ -1,5 +1,10 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const passport = require('passport');
+
+//passport config
+require('./config/passport')(passport);
+
 //load routes
 const auth = require('./routes/auth');
 
