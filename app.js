@@ -8,6 +8,18 @@ require('./config/passport')(passport);
 //load routes
 const auth = require('./routes/auth');
 
+//loud keys
+const keys = require('./config/keys')
+
+//mongoose connect
+mongoose.connect(keys.mongoURI)
+    .then(() => {
+        console.log('MongoDB connected')
+    })
+    .catch((err) => {
+        console.log(err)
+    })
+
 const app =  express();
 
 const port =  process.env.PORT || 8080;
