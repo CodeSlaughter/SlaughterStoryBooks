@@ -5,9 +5,11 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const exhbs = require('express-handlebars');
 const path = require('path');
+const bodyParser = require('body-parser');
 
 // Load User model
 require('./models/User')
+require('./models/Story')
 
 //passport config
 require('./config/passport')(passport);
@@ -57,6 +59,12 @@ app.set('view engine', 'handlebars');
 
 // Set static folder
 app.use(express.static(path.join(__dirname, 'public')))
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+
+// parse application/json
+app.use(bodyParser.json())
 
 // Use routes
 app.use('/auth', auth);
