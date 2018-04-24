@@ -4,6 +4,7 @@ const passport = require('passport');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const exhbs = require('express-handlebars');
+const path = require('path');
 
 // Load User model
 require('./models/User')
@@ -13,7 +14,8 @@ require('./config/passport')(passport);
 
 //load routes
 const auth = require('./routes/auth');
-const index = require('./routes/index')
+const index = require('./routes/index');
+const stories = require('./routes/stories')
 
 //loud keys
 const keys = require('./config/keys')
@@ -53,8 +55,12 @@ app.engine('handlebars', exhbs({
 }));
 app.set('view engine', 'handlebars');
 
+// Set static folder
+app.use(express.static(path.join(__dirname, 'public')))
+
 // Use routes
 app.use('/auth', auth);
+app.use('/stories', stories);
 app.use('/', index);
 
 app.listen(port, () => {
