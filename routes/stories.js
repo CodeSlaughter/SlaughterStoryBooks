@@ -24,8 +24,16 @@ router.get('/add', ensureAuthenticated, (req, res) => {
 });
 
 //edit stories
-router.get('/edit', ensureAuthenticated, (req, res) => {
-    res.render('stories/edit')
+router.get('/edit/:id', ensureAuthenticated, (req, res) => {
+    Story.findOne({
+        _id: req.params.id
+    })
+    .then((story) => {
+        res.render('stories/edit', {
+            story: story
+        })
+    })
+    .catch(err => console.log(err))
 });
 
 //process add stories
