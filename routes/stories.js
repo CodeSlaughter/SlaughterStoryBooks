@@ -99,4 +99,14 @@ router.put('/:id', (req, res) => {
     .catch(err => console.log(err))
 });
 
+//Delete form process
+router.delete('/:id', (req, res) => {
+    Story.remove({
+        _id: req.params.id
+    })
+    .then(()=>{
+        res.redirect('/dashboard')
+    });
+});
+
 module.exports = router;
