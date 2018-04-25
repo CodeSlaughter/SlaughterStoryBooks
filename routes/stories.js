@@ -74,4 +74,29 @@ router.get('/show/:id', (req, res) => {
     .catch(err => console.log(err))
 });
 
+//Edit form process
+router.put('/:id', (req, res) => {
+    Story.findOne({
+        _id: req.params.id
+    })
+    .then((story) => {
+        let allowComments;
+        if(req.body.allowComments){
+            allowComments = true;
+        } else {
+            allowComments = false;
+        }
+        story.title = req.body.title;
+        story.body = req.body.body;
+        story.status = req.body.status;
+        story.allowComments = allowComments;
+        story.save()
+        .then((story) => {
+            res.redirect('/dashboard')
+        })
+        .catch(err => console.log(err))
+    })
+    .catch(err => console.log(err))
+});
+
 module.exports = router;

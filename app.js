@@ -6,6 +6,7 @@ const session = require('express-session');
 const exhbs = require('express-handlebars');
 const path = require('path');
 const bodyParser = require('body-parser');
+const methodOverride = require('method-override');
 
 // Load User model
 require('./models/User')
@@ -75,11 +76,12 @@ app.set('view engine', 'handlebars');
 // Set static folder
 app.use(express.static(path.join(__dirname, 'public')))
 
-// parse application/x-www-form-urlencoded
+// Body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }))
-
-// parse application/json
 app.use(bodyParser.json())
+
+// method override middleware
+app.use(methodOverride('_method'));
 
 // Use routes
 app.use('/auth', auth);
