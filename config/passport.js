@@ -13,10 +13,11 @@ module.exports = function(passport){
             proxy: true
         }, (accessToken, refreshToken, profile, done) => {
             const image = profile.photos[0].value.substring(0, profile.photos[0].value.indexOf('?'));
+            console.log(profile)
             const newUser = {
                 googleID: profile.id,
                 firstName: profile.name.givenName,
-                lastName: profile.name.lastName,
+                lastName: profile.name.familyName,
                 email: profile.emails[0].value,
                 image: image
             }
