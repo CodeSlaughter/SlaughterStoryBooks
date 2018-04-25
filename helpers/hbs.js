@@ -8,6 +8,8 @@ module.exports = {
             return new_str + "...";
         }
         return str;
+    },
+    stripTags: function(input){
+        return input.replace(/<(?:.|\n)*?>/gm, '');
     }
-    //stripTags: function
 }

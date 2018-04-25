@@ -22,6 +22,12 @@ const stories = require('./routes/stories')
 //loud keys
 const keys = require('./config/keys')
 
+// handlebars helpers
+const {
+    truncate,
+    stripTags
+} = require('./helpers/hbs');
+
 //mongoose connect
 mongoose.connect(keys.mongoURI)
     .then(() => {
@@ -52,7 +58,12 @@ app.use((req, res, next) => {
     next();
 });
 
+//handlebars middleware
 app.engine('handlebars', exhbs({
+    helpers: {
+        truncate: truncate,
+        stripTags: stripTags
+    },
     defaultLayout: 'main'
 }));
 app.set('view engine', 'handlebars');
