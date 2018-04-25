@@ -16,6 +16,10 @@ body {
     height: 120px;
   }
 
+  .story-title-text{
+    height: 60px;
+  }
+
   .dash-status{
     text-transform: capitalize;
   }
